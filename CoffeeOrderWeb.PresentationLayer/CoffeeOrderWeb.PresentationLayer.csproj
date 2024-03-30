@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoffeeOrderWeb.BusinessLogicLayer\CoffeeOrderWeb.BusinessLogicLayer.csproj" />
+    <ProjectReference Include="..\CoffeeOrderWeb.DataAccesLayer\CoffeeOrderWeb.DataAccesLayer.csproj" />
+    <ProjectReference Include="..\CoffeeOrderWeb.EntityLayer\CoffeeOrderWeb.EntityLayer.csproj" />
+  </ItemGroup>
+
+</Project>
