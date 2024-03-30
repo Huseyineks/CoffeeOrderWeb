@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace CoffeeOrderWeb.PresentationLayer.Controllers
 {
-    [Authorize]
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -23,7 +23,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
 
         public async Task<IActionResult> Index() {
             var user = await _userManager.GetUserAsync(User);
-            await HttpContext.SignOutAsync();
+            
             if (user != null)
             {
                 // Kullanýcý bilgilerine eriþim

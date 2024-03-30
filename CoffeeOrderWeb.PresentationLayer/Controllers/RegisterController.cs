@@ -1,6 +1,7 @@
 ﻿using CoffeeOrderWeb.BusinessLogicLayer.DTOs;
 using CoffeeOrderWeb.EntityLayer.Model;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,12 +19,12 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             _validator = validator;
         }
 
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
 
         public async Task<IActionResult> Index(RegisterUserDTO newUser)
@@ -50,7 +51,8 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
                     City = newUser.City,
                     Region = newUser.Region,
                     PostalCode = newUser.PostalCode,
-                    FullAdress = newUser.FullAdress
+                    FullAdress = newUser.FullAdress,
+                    EmailConfirmed = true
 
                 };
                 var result = await _userManager.CreateAsync(user,newUser.Password);

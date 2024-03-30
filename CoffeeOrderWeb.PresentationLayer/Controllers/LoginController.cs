@@ -1,6 +1,7 @@
 ﻿using CoffeeOrderWeb.BusinessLogicLayer.VMs;
 using CoffeeOrderWeb.EntityLayer.Model;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,17 +18,17 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
 
         public async Task<IActionResult> Index(LoginViewModel user)
-        {
+                {
             var result = await _signInManager.PasswordSignInAsync(user.Username, user.Password,false,true);
             
             if (result.Succeeded)
@@ -45,7 +46,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Login");
         }
 
     }
