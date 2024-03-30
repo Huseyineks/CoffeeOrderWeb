@@ -1,9 +1,21 @@
+using CoffeeOrderWeb.BusinessLogicLayer.DTOs;
+using CoffeeOrderWeb.BusinessLogicLayer.Validators;
+using CoffeeOrderWeb.DataAccesLayer.Data;
+using CoffeeOrderWeb.EntityLayer.Model;
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddIdentity<AppUser, AppUserRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddScoped<IValidator<RegisterUserDTO>, RegisterUserValidator>();
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -18,6 +30,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
