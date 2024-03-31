@@ -23,6 +23,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Login/Index";
+    
     // Diðer cookie yapýlandýrmalarý
 });
 var app = builder.Build();

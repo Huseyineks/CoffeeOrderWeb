@@ -26,4 +26,9 @@
     <ProjectReference Include="..\CoffeeOrderWeb.EntityLayer\CoffeeOrderWeb.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Concrete\" />
+    <Folder Include="Abstract\" />
+  </ItemGroup>
+
 </Project>

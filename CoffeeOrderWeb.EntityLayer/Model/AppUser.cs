@@ -22,5 +22,12 @@ namespace CoffeeOrderWeb.EntityLayer.Model
         public string PostalCode { get; set; }
 
         public string FullAdress { get; set; }
+
+
+        //relation
+        public virtual List<PaymentInformation> PaymentInformations { get; set; }
+        public virtual List<Order> Orders { get; set; }
+
+
     }
 }
