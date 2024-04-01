@@ -19,12 +19,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CoffeeOrderWeb.BusinessLogicLayer\CoffeeOrderWeb.BusinessLogicLayer.csproj" />
     <ProjectReference Include="..\CoffeeOrderWeb.DataAccesLayer\CoffeeOrderWeb.DataAccesLayer.csproj" />
     <ProjectReference Include="..\CoffeeOrderWeb.EntityLayer\CoffeeOrderWeb.EntityLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
 </Project>

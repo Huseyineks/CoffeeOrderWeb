@@ -28,9 +28,9 @@ builder.Services.ConfigureApplicationCookie(options =>
     
     
 });
-builder.Services.AddScoped<IOrderDetailsService,OrderDetailsService>();
-builder.Services.AddScoped<IOrderService,OrderService>();
-builder.Services.AddScoped<IPaymentService,PaymentService>();
+//builder.Services.AddScoped<IOrderDetailsService,OrderDetailsService>();
+//builder.Services.AddScoped<IOrderService,OrderService>();
+//builder.Services.AddScoped<IPaymentService,PaymentService>();
 var app = builder.Build();
 
 
@@ -55,4 +55,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "MyArea",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.Run();
