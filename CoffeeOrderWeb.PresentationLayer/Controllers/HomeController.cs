@@ -1,3 +1,4 @@
+using CoffeeOrderWeb.BusinessLogicLayer.Abstract;
 using CoffeeOrderWeb.EntityLayer.Model;
 using CoffeeOrderWeb.PresentationLayer.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -15,13 +16,19 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
 
         private readonly UserManager<AppUser> _userManager;
 
+        
+
         public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager)
         {
             _logger = logger;
             _userManager = userManager;
+            
+
+
         }
 
         public async Task<IActionResult> Index() {
+            
             var user = await _userManager.GetUserAsync(User);
             
             if (user != null)

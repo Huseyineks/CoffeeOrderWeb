@@ -18,6 +18,8 @@ namespace CoffeeOrderWeb.EntityLayer.Model
 
         public bool MoreCaffein { get; set; }
 
+        public string Note { get; set; }
+
         //relation
 
         public int OrderId { get; set; }

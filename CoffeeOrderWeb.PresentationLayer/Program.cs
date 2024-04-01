@@ -3,6 +3,8 @@ using CoffeeOrderWeb.BusinessLogicLayer.Validators;
 using CoffeeOrderWeb.DataAccesLayer.Data;
 using CoffeeOrderWeb.EntityLayer.Model;
 using FluentValidation;
+using CoffeeOrderWeb.BusinessLogicLayer.Abstract;
+using CoffeeOrderWeb.BusinessLogicLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +26,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Login/Index";
     
-    // Diðer cookie yapýlandýrmalarý
+    
 });
+builder.Services.AddScoped<IOrderDetailsService,OrderDetailsService>();
+builder.Services.AddScoped<IOrderService,OrderService>();
+builder.Services.AddScoped<IPaymentService,PaymentService>();
 var app = builder.Build();
 
 
