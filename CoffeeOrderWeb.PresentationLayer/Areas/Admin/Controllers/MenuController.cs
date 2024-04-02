@@ -73,9 +73,37 @@ namespace CoffeeOrderWeb.PresentationLayer.Areas.Admin.Controllers
 
             _menuService.Save();
 
-            return RedirectToAction("Index");
+            return Redirect("/Admin/Menu/Index");
         
         
+        }
+        public IActionResult EditMenu(int ?id) { 
+        
+        Menu menu = _menuService.Get(i => i.MenuId == id);
+
+        return View(menu);
+        
+        
+        }
+        [HttpPost]
+
+        public IActionResult EditMenu(Menu updatedMenu)
+        {
+            _menuService.Update(updatedMenu);
+            _menuService.Save();
+
+            return Redirect("/Admin/Menu/Index");
+        }
+       
+
+        
+        public IActionResult DeleteMenu(int? id)
+        {
+            _menuService.Delete(_menuService.Get(i => i.MenuId == id));
+
+            _menuService.Save();
+
+            return Redirect("/Admin/Menu/Index");
         }
     }
 }
