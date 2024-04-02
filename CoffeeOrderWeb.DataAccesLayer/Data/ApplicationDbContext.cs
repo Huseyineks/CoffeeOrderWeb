@@ -26,5 +26,7 @@ namespace CoffeeOrderWeb.DataAccesLayer.Data
         public DbSet<OrderDetails> OrderDetails { get; set; }
 
         public DbSet<PaymentInformation> PaymentInformations { get; set; }
+
+        public DbSet<Menu> Menus { get; set; }
     }
 }

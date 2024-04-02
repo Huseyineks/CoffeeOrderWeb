@@ -11,9 +11,9 @@ namespace CoffeeOrderWeb.BusinessLogicLayer.Concrete
 {
     public class OrderDetailsService : BaseService<OrderDetails>,IOrderDetailsService
     {
-        private readonly IBaseRepository<OrderDetails> _repository;
+       
         public OrderDetailsService(IBaseRepository<OrderDetails> repository) : base(repository) { 
-            _repository = repository;
+           
         
         }
 

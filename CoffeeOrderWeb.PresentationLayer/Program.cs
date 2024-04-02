@@ -8,6 +8,9 @@ using CoffeeOrderWeb.BusinessLogicLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
+using CoffeeOrderWeb.DataAccesLayer.Abstract;
+using CoffeeOrderWeb.DataAccesLayer.Concrete;
+using Microsoft.Build.Framework;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddIdentity<AppUser, AppUserRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<IValidator<RegisterUserDTO>, RegisterUserValidator>();
+
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<IOrderDetailsService, OrderDetailsService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IPaymentService,PaymentService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
+
+
 builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = new AuthorizationPolicyBuilder()

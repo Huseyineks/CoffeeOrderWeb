@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeOrderWeb.BusinessLogicLayer.Abstract
 {
-    public interface IBaseService<T> where T : class
+    public interface IBaseService<T>
     {
         void Add(T entity);
 

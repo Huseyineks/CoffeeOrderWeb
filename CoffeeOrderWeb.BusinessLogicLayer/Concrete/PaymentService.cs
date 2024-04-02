@@ -11,11 +11,10 @@ namespace CoffeeOrderWeb.BusinessLogicLayer.Concrete
 {
     public class PaymentService : BaseService<PaymentInformation>, IPaymentService
     {
-        private readonly IBaseRepository<PaymentInformation> _repository;
+        
         public PaymentService(IBaseRepository<PaymentInformation> repository) : base(repository)
         {
-            _repository = repository;
-         
+            
 
         }
     }

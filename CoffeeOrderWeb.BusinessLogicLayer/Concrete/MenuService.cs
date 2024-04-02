@@ -9,13 +9,8 @@ using System.Threading.Tasks;
 
 namespace CoffeeOrderWeb.BusinessLogicLayer.Concrete
 {
-    public class OrderService : BaseService<Order>, IOrderService
+    public class MenuService : BaseService<Menu>,IMenuService
     {
-        
-        public OrderService(IBaseRepository<Order> repository) : base(repository)
-        {
-           
-
-        }
+        public MenuService(IBaseRepository<Menu> repository) : base(repository) { }
     }
 }
