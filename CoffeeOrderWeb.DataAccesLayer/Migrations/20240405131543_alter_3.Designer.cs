@@ -4,6 +4,7 @@ using CoffeeOrderWeb.DataAccesLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoffeeOrderWeb.DataAccesLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240405131543_alter_3")]
+    partial class alter_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,12 +195,7 @@ namespace CoffeeOrderWeb.DataAccesLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("OrderId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -225,13 +223,7 @@ namespace CoffeeOrderWeb.DataAccesLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("orderId")
-                        .HasColumnType("int");
-
                     b.HasKey("MenuDetailsId");
-
-                    b.HasIndex("orderId")
-                        .IsUnique();
 
                     b.ToTable("OrderDetails");
                 });
@@ -267,12 +259,7 @@ namespace CoffeeOrderWeb.DataAccesLayer.Migrations
                     b.Property<bool>("IsSaved")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("PaymentId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("PaymentInformations");
                 });
@@ -380,39 +367,6 @@ namespace CoffeeOrderWeb.DataAccesLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CoffeeOrderWeb.EntityLayer.Model.Order", b =>
-                {
-                    b.HasOne("CoffeeOrderWeb.EntityLayer.Model.AppUser", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CoffeeOrderWeb.EntityLayer.Model.OrderDetails", b =>
-                {
-                    b.HasOne("CoffeeOrderWeb.EntityLayer.Model.Order", "Order")
-                        .WithOne("Details")
-                        .HasForeignKey("CoffeeOrderWeb.EntityLayer.Model.OrderDetails", "orderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("CoffeeOrderWeb.EntityLayer.Model.PaymentInformation", b =>
-                {
-                    b.HasOne("CoffeeOrderWeb.EntityLayer.Model.AppUser", "User")
-                        .WithMany("PaymentInformations")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("CoffeeOrderWeb.EntityLayer.Model.AppUserRole", null)
@@ -461,19 +415,6 @@ namespace CoffeeOrderWeb.DataAccesLayer.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CoffeeOrderWeb.EntityLayer.Model.AppUser", b =>
-                {
-                    b.Navigation("Orders");
-
-                    b.Navigation("PaymentInformations");
-                });
-
-            modelBuilder.Entity("CoffeeOrderWeb.EntityLayer.Model.Order", b =>
-                {
-                    b.Navigation("Details")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

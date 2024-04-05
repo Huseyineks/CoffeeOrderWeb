@@ -1,0 +1,127 @@
+﻿@model MenuViewModel
+
+<script>
+    function openModal(menuID) {
+        // Tüm modalları gizle
+        $('#Modal-' + menuID).show(); // İlgili modali göster
+    }
+
+    function closeModal(menuID) {
+        $('#Modal-' + menuID).hide(); // Modalı gizle
+        resetModalSelections(menuID); // Seçimleri sıfırla
+        
+            
+    }
+
+    function resetModalSelections(menuID) {
+        $('#SizeOptions').prop('checked', false); // Boyut seçimlerini sıfırla
+        $('input[name="Drink-' + menuID + '"]').prop('checked', false); // İçecek seçimlerini sıfırla
+        $('input[name="Caffeine-' + menuID + '"]').prop('checked', false); // Kafein seçimlerini sıfırla
+        $('#Note-' + menuID).val(''); // Not alanını sıfırla
+       
+    }
+</script>
+
+<!-- Menü kartları -->
+<div class="row p-4">
+    @foreach (var menu in Model.menus)
+    {
+        <div class="col-3">
+            <div class="card mb-3">
+                <h3 class="card-header">@menu.ProductName</h3>
+                <figure class="mb-4">
+                    <img class="img-fluid rounded" src="~/Images/@menu.ProductImage" alt="..." style="height:300px; width:500px">
+                </figure>
+                <div class="card-body">
+                    <p class="card-text">@menu.ProductContent</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-0" style="display:flex; justify-content:space-between; align-items:center">
+                        <div><h3>@menu.ProductPrice$</h3></div>
+                        <button type="button" class="btn btn-success" onclick="openModal()">
+                            Add
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+
+@foreach (var menu in Model.menus)
+{
+    <div class="modal" id="Modal-@menu.MenuId" style="display:none">
+        <!-- Modal içeriği -->
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <img class="img-fluid rounded" src="~/Images/3feb42e2-f309-48e3-8808-12d4029c4abf-ben.jpeg" alt="..." style="height:500px; width:100%">
+                <form method="post" style="padding:10px">
+                    <fieldset>
+
+                        <fieldset>
+                            <legend class="mt-4">Size</legend>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="orderDetails.Size" id="SizeOptions" value="Large">
+                                <label class="form-check-label" for="Size-Large-@menu.MenuId">
+                                    Large
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="orderDetails.Size" id="SizeOptions" value="Medium">
+                                <label class="form-check-label" for="Size-Medium-@menu.MenuId">
+                                    Medium
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="orderDetails.Size" id="SizeOptions" value="Small">
+                                <label class="form-check-label" for="Size-Small-@menu.MenuId">
+                                    Small
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend class="mt-4">Drink</legend>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="orderDetails.ColdOrHot" id="Drink-Iced-@menu.MenuId" value="Iced">
+                                <label class="form-check-label" for="Drink-Iced-@menu.MenuId">
+                                    Iced
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="orderDetails.ColdOrHot" id="Drink-Normal-@menu.MenuId" value="Normal">
+                                <label class="form-check-label" for="Drink-Normal-@menu.MenuId">
+                                    Normal
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend class="mt-4">Would you like more caffeine?</legend>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="orderDetails.MoreCaffein" id="Caffeine-Yes-@menu.MenuId" value="Yes">
+                                <label class="form-check-label" for="Caffeine-Yes-@menu.MenuId">
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="orderDetails.MoreCaffein" id="Caffeine-No-@menu.MenuId" value="No">
+                                <label class="form-check-label" for="Caffeine-No-@menu.MenuId">
+                                    No
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <div>
+                            <label for="Note-@menu.MenuId" class="form-label mt-4">Note</label>
+                            <textarea class="form-control" id="Note-@menu.MenuId" rows="3" asp-for="orderDetails.Note" placeholder="Is there anything we need to know?"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </fieldset>
+                </form>
+                <button type="button" class="close" onclick="closeModal('@menu.MenuId')">Close</button>
+            </div>
+        </div>
+    </div>
+}

@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeeOrderWeb.EntityLayer.Model
+namespace CoffeeOrderWeb.BusinessLogicLayer.DTOs
 {
-    public class OrderDetails
+    public class OrderDetailsDTO
     {
-        [Key]
-        public int MenuDetailsId { get; set; }
-        
         public string Size { get; set; }
 
         public string ColdOrHot { get; set; }
@@ -20,11 +16,6 @@ namespace CoffeeOrderWeb.EntityLayer.Model
 
         public string Note { get; set; } = string.Empty;
 
-        //relation
-
-        public int orderId { get; set; }
-        public virtual Order Order { get; set; }
-
-        
+        public int OrderId { get; set; }
     }
 }

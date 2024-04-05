@@ -18,10 +18,10 @@ namespace CoffeeOrderWeb.EntityLayer.Model
 
 
 
-        //relatin
+        //relation
         public int UserId { get; set; }
         public virtual AppUser User { get; set; }
 
-        public virtual List<OrderDetails> Details { get; set; }
+        public virtual OrderDetails Details { get; set; }
     }
 }

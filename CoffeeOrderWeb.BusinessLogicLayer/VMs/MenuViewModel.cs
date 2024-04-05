@@ -1,4 +1,5 @@
-﻿using CoffeeOrderWeb.EntityLayer.Model;
+﻿using CoffeeOrderWeb.BusinessLogicLayer.DTOs;
+using CoffeeOrderWeb.EntityLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace CoffeeOrderWeb.BusinessLogicLayer.VMs
 {
     public class MenuViewModel
     {
-        public List<Menu> menus {  get; set; }
+        public List<Menu>? menus {  get; set; }
+
+        public OrderDetailsDTO? orderDetails { get; set; }
     }
 }
