@@ -12,6 +12,8 @@ namespace CoffeeOrderWeb.EntityLayer.Model
         [Key]
         public int OrderId { get; set; }
 
+        public string ProductImage { get; set; }
+
         public string ProductName { get; set; }
 
         public string ProductPrice { get; set; }

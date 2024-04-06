@@ -26,18 +26,18 @@ namespace CoffeeOrderWeb.DataAccesLayer.Data
             base.OnModelCreating(builder);
             builder.Entity<OrderDetails>(entity =>
             {
-                entity.HasOne(i => i.Order).WithOne(i => i.Details).HasForeignKey<OrderDetails>(i => i.orderId);
+                entity.HasOne(i => i.Order).WithOne(i => i.Details).HasForeignKey<OrderDetails>(i => i.orderId).OnDelete(DeleteBehavior.Cascade);
             });
 
             builder.Entity<Order>(entity =>
             {
                 entity.Property(i => i.OrderId).ValueGeneratedOnAdd();
-                entity.HasOne(i => i.User).WithMany(i => i.Orders).HasForeignKey(i => i.UserId);
+                entity.HasOne(i => i.User).WithMany(i => i.Orders).HasForeignKey(i => i.UserId).OnDelete(DeleteBehavior.Cascade);
             });
 
             builder.Entity<PaymentInformation>(entity =>
             {
-                entity.HasOne(i => i.User).WithMany(i => i.PaymentInformations).HasForeignKey(i => i.UserId);
+                entity.HasOne(i => i.User).WithMany(i => i.PaymentInformations).HasForeignKey(i => i.UserId).OnDelete(DeleteBehavior.Cascade);
             });
         }
 

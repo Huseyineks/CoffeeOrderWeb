@@ -16,8 +16,8 @@
           
                     <li class="list-group-item p-0" style="display:flex; justify-content:space-between; align-items:center">
                         <div><h3>@menu.ProductPrice$</h3></div>
-                       
-                        <button type="button" class="btn btn-success" data-menuid ="@menu.MenuId" id="ModalButton-@menu.MenuId"  onclick="openModal('@menu.MenuId')">
+
+                        <button type="button" class="btn btn-success" data-image='@Url.Content("~/Images/" + @menu.ProductImage)' data-menuid="@menu.MenuId" id="ModalButton-@menu.MenuId" onclick="openModal('@menu.MenuId')">
                             Add
                         </button>
                     </li>
@@ -38,7 +38,7 @@
 <div class="modal" id="Modal1" style="display:none">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <img class="img-fluid rounded" src="~/Images/3feb42e2-f309-48e3-8808-12d4029c4abf-ben.jpeg" alt="..." style="height:500px; width:100%">
+            <img class="img-fluid rounded" alt="..."  style="height:500px; width:100%" id ="ModalImage">
             <form method="post" style="padding:10px">
                 <fieldset>
 
