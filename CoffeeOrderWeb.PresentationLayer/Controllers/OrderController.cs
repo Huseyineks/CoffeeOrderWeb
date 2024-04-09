@@ -11,13 +11,13 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
         {
             _orderService = orderService;
         }
-        public IActionResult Delete(int? id)
+        public IActionResult RemoveOrder(int? id)
         {
-            _orderService.Delete(_orderService.Get(i => i.OrderId == id));
+            _orderService.Remove(_orderService.Get(i => i.OrderId == id));
 
             _orderService.Save();
 
-            return View();
+            return RedirectToAction("Index","Basket");
         }
         public IActionResult Edit() { 
         

@@ -26,7 +26,7 @@ namespace CoffeeOrderWeb.DataAccesLayer.Concrete
             _dbSet.Add(entity);
         }
 
-        public void Delete(T entity)
+        public void Remove(T entity)
         {
             _dbSet.Remove(entity);
         }

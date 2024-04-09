@@ -97,9 +97,9 @@ namespace CoffeeOrderWeb.PresentationLayer.Areas.Admin.Controllers
        
 
         
-        public IActionResult DeleteMenu(int? id)
+        public IActionResult RemoveMenu(int? id)
         {
-            _menuService.Delete(_menuService.Get(i => i.MenuId == id));
+            _menuService.Remove(_menuService.Get(i => i.MenuId == id));
 
             _menuService.Save();
 

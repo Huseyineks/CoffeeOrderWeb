@@ -41,7 +41,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             var user = await _userManager.GetUserAsync(User);
             Order newOrder = new Order()
             {
-                
+                ProductImage = menu.ProductImage,
                 ProductName = menu.ProductName,
                 ProductPrice = menu.ProductPrice,
                 UserId = user.Id,

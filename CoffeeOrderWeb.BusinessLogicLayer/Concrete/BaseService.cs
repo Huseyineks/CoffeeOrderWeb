@@ -23,9 +23,9 @@ namespace CoffeeOrderWeb.BusinessLogicLayer.Concrete
             _baseRepository.Add(entity);
         }
 
-        public void Delete(T entity)
+        public void Remove(T entity)
         {
-            _baseRepository.Delete(entity);
+            _baseRepository.Remove(entity);
         }
 
         public T Get(Expression<Func<T, bool>> filter)
