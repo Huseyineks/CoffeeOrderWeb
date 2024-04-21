@@ -21,6 +21,7 @@ builder.Services.AddIdentity<AppUser, AppUserRole>(options => options.SignIn.Req
 builder.Services.AddScoped<IValidator<RegisterUserDTO>, RegisterUserValidator>();
 
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderDetailsService, OrderDetailsService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IPaymentService,PaymentService>();
@@ -39,9 +40,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     
     
 });
-//builder.Services.AddScoped<IOrderDetailsService,OrderDetailsService>();
-//builder.Services.AddScoped<IOrderService,OrderService>();
-//builder.Services.AddScoped<IPaymentService,PaymentService>();
+
 var app = builder.Build();
 
 

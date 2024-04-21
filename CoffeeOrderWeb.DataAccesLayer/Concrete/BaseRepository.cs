@@ -46,6 +46,8 @@ namespace CoffeeOrderWeb.DataAccesLayer.Concrete
         public List<T> GetClassifiedList(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = _dbSet.Where(filter);
+            
+
 
             return query.ToList();
         }

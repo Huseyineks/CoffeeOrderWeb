@@ -24,7 +24,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
 
             BasketViewModel basketViewModel = new BasketViewModel()
             {
-                orders = _orderService.GetClassifiedList(i => i.UserId == user.Id),
+                orders = _orderService.GetOrderDetails(i => i.UserId == user.Id),
                 orderDetails = null
 
             };

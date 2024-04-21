@@ -17,13 +17,92 @@
                     <li class="list-group-item p-0" style="display:flex; justify-content:space-between; align-items:center">
                         <div><h3>@menu.ProductPrice$</h3></div>
 
-                        <button type="button" class="btn btn-success" data-image='@Url.Content("~/Images/" + @menu.ProductImage)' data-menuid="@menu.MenuId" id="ModalButton-@menu.MenuId" onclick="openModal('@menu.MenuId')">
+                        <button type="button" class="btn btn-success"  onclick="openModal('@menu.MenuId')">
                             Add
                         </button>
                     </li>
 
                 </ul>
 
+            </div>
+        </div>
+        <div class="modal" id="Modal1-@menu.MenuId" style="display:none">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <img class="img-fluid rounded" alt="..." style="height:500px; width:100%" id="ModalImage" src="~/Images/@menu.ProductImage">
+                    <form method="post" style="padding:10px">
+                        <fieldset>
+
+                            <fieldset>
+                                <legend class="mt-4">Size</legend>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="orderDetails.Size" id="SizeOptions-Large-@menu.MenuId" value="Large">
+                                    <label class="form-check-label" for="SizeOptions-Large-@menu.MenuId">
+                                        Large
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="orderDetails.Size" id="SizeOptions-Medium-@menu.MenuId" value="Medium">
+                                    <label class="form-check-label" for="SizeOptions-Medium-@menu.MenuId">
+                                        Medium
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="orderDetails.Size" id="SizeOptions-Small-@menu.MenuId" value="Small">
+                                    <label class="form-check-label" for="SizeOptions-Small-@menu.MenuId">
+                                        Small
+                                    </label>
+                                </div>
+
+
+                            </fieldset>
+
+                            <fieldset>
+                                <legend class="mt-4">Drink</legend>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="orderDetails.ColdOrHot" id="DrinkOptions-Iced-@menu.MenuId" value="Iced">
+                                    <label class="form-check-label" for="DrinkOptions-Iced-@menu.MenuId">
+                                        Iced
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="orderDetails.ColdOrHot" id="DrinkOptions-Normal-@menu.MenuId" value="Normal">
+                                    <label class="form-check-label" for="DrinkOptions-Normal-@menu.MenuId">
+                                        Normal
+                                    </label>
+                                </div>
+
+                            </fieldset>
+                            <fieldset>
+                                <legend class="mt-4">Would you like more caffein ?</legend>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="orderDetails.MoreCaffein" id="CaffeinOptions-Yes-@menu.MenuId" value="true">
+                                    <label class="form-check-label" for="CaffeinOptions-Yes-@menu.MenuId">
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="orderDetails.MoreCaffein" id="CaffeinOptions-No-@menu.MenuId" value="false">
+                                    <label class="form-check-label" for="CaffeinOptions-No-@menu.MenuId">
+                                        No
+                                    </label>
+                                </div>
+
+                            </fieldset>
+
+                            <div>
+                                <label for="Note-@menu.MenuId" class="form-label mt-4">Note</label>
+                                <textarea class="form-control" id="Note-@menu.MenuId" rows="3" asp-for="orderDetails.Note" placeholder="Is there anything we need to know ?"></textarea>
+                            </div>
+
+
+                            <input type="hidden" id="MenuIdInput" name="orderDetails.OrderId" asp-for="@menu.MenuId" />
+
+                            <button type="submit" class="btn btn-primary" id="modalButton">Add</button>
+                        </fieldset>
+                    </form>
+                    <button type="button" class="close" onclick="closeModal()">Kapan</button>
+                </div>
             </div>
         </div>
 
@@ -35,85 +114,6 @@
 
 
 
-<div class="modal" id="Modal1" style="display:none">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <img class="img-fluid rounded" alt="..."  style="height:500px; width:100%" id ="ModalImage">
-            <form method="post" style="padding:10px">
-                <fieldset>
-
-                    <fieldset>
-                        <legend class="mt-4">Size</legend>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="orderDetails.Size" id="SizeOptions-Large" value="Large">
-                            <label class="form-check-label" for="SizeOptions-Large">
-                                Large
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="orderDetails.Size" id="SizeOptions-Medium" value="Medium">
-                            <label class="form-check-label" for="SizeOptions-Medium">
-                               Medium
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="orderDetails.Size" id="SizeOptions-Small" value="Small">
-                            <label class="form-check-label" for="SizeOptions-Small">
-                               Small
-                            </label>
-                        </div>
-
-
-                    </fieldset>
-
-                    <fieldset>
-                        <legend class="mt-4">Drink</legend>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="orderDetails.ColdOrHot" id="DrinkOptions-Iced" value="Iced">
-                            <label class="form-check-label" for="DrinkOptions-Iced">
-                                Iced 
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="orderDetails.ColdOrHot" id="DrinkOptions-Normal" value="Normal">
-                            <label class="form-check-label" for="DrinkOptions-Normal">
-                                Normal
-                            </label>
-                        </div>
-                        
-                    </fieldset>
-                    <fieldset>
-                        <legend class="mt-4">Would you like more caffein ?</legend>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="orderDetails.MoreCaffein" id="CaffeinOptions-Yes" value="true">
-                            <label class="form-check-label" for="CaffeinOptions-Yes">
-                                Yes
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="orderDetails.MoreCaffein" id="CaffeinOptions-No" value="false">
-                            <label class="form-check-label" for="CaffeinOptions-No">
-                                No
-                            </label>
-                        </div>
-
-                    </fieldset>
-
-                    <div>
-                        <label for="Note" class="form-label mt-4">Note</label>
-                        <textarea class="form-control" id="Note" rows="3" asp-for="orderDetails.Note" placeholder="Is there anything we need to know ?"></textarea>
-                    </div>
-
-
-                    <input type="hidden" id="MenuIdInput" asp-for="orderDetails.OrderId" />
-
-                    <button type="submit" class="btn btn-primary" id ="modalButton">Add</button>
-                </fieldset>
-            </form>
-            <button type="button" class="close" onclick="closeModal()">Kapan</button>
-        </div>
-    </div>
-</div>
 
 
 <script src="~/lib/jquery/dist/MyScript.js"></script>
