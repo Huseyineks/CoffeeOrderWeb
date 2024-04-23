@@ -3,6 +3,7 @@ using CoffeeOrderWeb.BusinessLogicLayer.VMs;
 using CoffeeOrderWeb.EntityLayer.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace CoffeeOrderWeb.PresentationLayer.Controllers
 {
@@ -29,7 +30,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
 
             };
 
-            
+
             
 
             return View(basketViewModel);
@@ -51,6 +52,25 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
 
 
             return RedirectToAction("Index","Basket");
+        }
+
+        public IActionResult Details()
+        {
+            var orders = _orderService.GetAll();
+            float totalPrice = 0;
+            List<string> Products = new List<string>();
+
+            foreach(var product in orders)
+            {
+                totalPrice += float.Parse(product.ProductPrice, NumberStyles.Float, CultureInfo.InvariantCulture);
+                Products.Add(product.ProductName);
+                
+            }
+            ViewBag.TotalPrice = totalPrice;
+            ViewBag.Products = Products;
+            
+
+            return View();
         }
     }
 }

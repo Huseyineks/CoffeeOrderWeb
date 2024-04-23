@@ -1,0 +1,36 @@
+﻿@model List<AppUser>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">LastName</th>
+            <th scope="col">CreatedAt</th>
+            <th scope="col">City</th>
+            <th scope="col">Region</th>
+            <th scope="col">PostalCode</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+            {
+        <tr class="table-light">
+            
+                <th scope="row">@user.Id</th>
+                <td>@user.Name</td>
+                <td>@user.LastName</td>
+                <td>@user.CreatedDate</td>
+                <td>@user.City</td>
+                <td>@user.Region</td>
+                <td>@user.PostalCode</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+            
+        </tr>
+            }
+    </tbody>
+</table>
