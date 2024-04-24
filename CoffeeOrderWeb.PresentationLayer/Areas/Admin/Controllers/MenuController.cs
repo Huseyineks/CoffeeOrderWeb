@@ -2,11 +2,13 @@
 using CoffeeOrderWeb.BusinessLogicLayer.DTOs;
 using CoffeeOrderWeb.BusinessLogicLayer.VMs;
 using CoffeeOrderWeb.EntityLayer.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeOrderWeb.PresentationLayer.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class MenuController : Controller
     {

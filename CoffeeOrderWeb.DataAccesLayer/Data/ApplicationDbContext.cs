@@ -1,6 +1,8 @@
 ﻿using CoffeeOrderWeb.EntityLayer.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Stripe.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +41,21 @@ namespace CoffeeOrderWeb.DataAccesLayer.Data
             {
                 entity.HasOne(i => i.User).WithMany(i => i.PaymentInformations).HasForeignKey(i => i.UserId).OnDelete(DeleteBehavior.Cascade);
             });
+            SeedRoles(builder);
+        }
+
+        private static void SeedRoles(ModelBuilder builder)
+        {
+           
+
+
+            builder.Entity<AppUserRole>().HasData(
+
+                new AppUserRole() {Id = 1 ,Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
+                new AppUserRole() {Id = 2 ,Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" }
+
+
+                );
         }
 
        

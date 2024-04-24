@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using CoffeeOrderWeb.DataAccesLayer.Abstract;
 using CoffeeOrderWeb.DataAccesLayer.Concrete;
 using Microsoft.Build.Framework;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -76,6 +77,8 @@ app.UseEndpoints(endpoints =>
       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 });
+
+
 
 
 

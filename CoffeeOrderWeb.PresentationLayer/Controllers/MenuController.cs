@@ -1,6 +1,7 @@
 ﻿using CoffeeOrderWeb.BusinessLogicLayer.Abstract;
 using CoffeeOrderWeb.BusinessLogicLayer.VMs;
 using CoffeeOrderWeb.EntityLayer.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -8,6 +9,7 @@ using System.Security.Claims;
 
 namespace CoffeeOrderWeb.PresentationLayer.Controllers
 {
+    
     public class MenuController : Controller
     {
         private readonly IMenuService _menuService;

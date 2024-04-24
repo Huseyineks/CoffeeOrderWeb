@@ -19,7 +19,7 @@ namespace CoffeeOrderWeb.BusinessLogicLayer.Validators
             _userManager = userManager;
             _users = _userManager.Users.AsQueryable();
             RuleFor(x => x.Email).EmailAddress().WithMessage("Please enter a valid email.").Must(ExistEmail).WithMessage("Email is used.");
-            RuleFor(x => x.Password).Equal(x => x.confirmPassword).WithMessage("Make sure passwords are equal").Must(ExistPassword).WithMessage("Password is exist.");
+            RuleFor(x => x.Password).Equal(x => x.confirmPassword).WithMessage("Make sure passwords are equal").Must(ExistPassword).WithMessage("Password exist.");
             RuleFor(x => x.UserName).Must(ExistUserName).WithMessage("Username is used.");
             RuleFor(x => x.Name).Must(beAlphabetic).WithMessage("Please enter a valid name.").MinimumLength(3).WithMessage("Your name is short");
             RuleFor(x => x.LastName).Must(beAlphabetic).WithMessage("Please enter a valid lastname.").MinimumLength(3).WithMessage("Your lastname is short");
@@ -62,7 +62,9 @@ namespace CoffeeOrderWeb.BusinessLogicLayer.Validators
         }
         private bool ExistPassword(string password) { 
         
-        var User = _users.Where(i => i.PasswordHash.ToString() == password).FirstOrDefault();
+        var User = _users.Where(i => i.PasswordHash == password).FirstOrDefault();
+
+        
 
         if (User == null)
         {
