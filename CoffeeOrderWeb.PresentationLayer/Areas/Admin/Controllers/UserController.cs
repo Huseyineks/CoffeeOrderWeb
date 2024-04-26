@@ -1,4 +1,6 @@
-﻿using CoffeeOrderWeb.EntityLayer.Model;
+﻿using CoffeeOrderWeb.BusinessLogicLayer.Abstract;
+using CoffeeOrderWeb.BusinessLogicLayer.VMs;
+using CoffeeOrderWeb.EntityLayer.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +14,13 @@ namespace CoffeeOrderWeb.PresentationLayer.Areas.Admin.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IOrderService _orderService;
 
-        public UserController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager)
+        public UserController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager,IOrderService orderService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _orderService = orderService;
         }
         public async Task<IActionResult> Index()
         {
@@ -43,6 +47,19 @@ namespace CoffeeOrderWeb.PresentationLayer.Areas.Admin.Controllers
 
             }
             return Redirect("/Admin/User/Index");
+        }
+        public async Task<IActionResult> Details(int? id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            var order = _orderService.GetClassifiedList(i => i.UserId == user.Id);
+
+           
+
+
+
+            return View(order);
+
         }
 
     }

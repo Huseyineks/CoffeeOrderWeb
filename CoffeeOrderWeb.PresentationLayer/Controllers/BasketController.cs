@@ -22,15 +22,15 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-
+            var userOrders= _orderService.GetOrderDetails(i => i.UserId == user.Id);
             BasketViewModel basketViewModel = new BasketViewModel()
             {
-                orders = _orderService.GetOrderDetails(i => i.UserId == user.Id),
+                orders = userOrders,
                 orderDetails = null
 
             };
 
-
+          
             
 
             return View(basketViewModel);

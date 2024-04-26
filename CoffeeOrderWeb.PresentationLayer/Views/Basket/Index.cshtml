@@ -1,6 +1,6 @@
 ﻿@model BasketViewModel
 
-    @if (Model != null){
+    @if (Model.orders.Count != 0){
 <div class="row p-4">
     @foreach (var order in Model.orders)
     {

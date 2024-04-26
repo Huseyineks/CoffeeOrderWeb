@@ -1,0 +1,23 @@
+﻿@model List<Order>
+
+
+<div class="row p-4">
+   
+    @foreach (var order in Model)
+    {
+
+        <div class="col-3">
+            <div class="card mb-3">
+                <h3 class="card-header">@order.ProductName</h3>
+                <figure class="mb-4"><img class="img-fluid rounded" src="~/Images/@order.ProductImage" alt="..." style="height:300px; width:500px"></figure>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@order.ProductPrice$</li>
+                    <li class="list-group-item">@order.createdAt</li>
+                </ul>
+            </div>
+        </div>
+
+    }
+
+
+</div>
