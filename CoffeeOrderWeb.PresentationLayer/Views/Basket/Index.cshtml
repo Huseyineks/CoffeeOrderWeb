@@ -17,10 +17,10 @@
                         <div><h3>@order.ProductPrice$</h3></div>
 
                         <div>
-                                <button type="button" class="btn btn-primary" id="ModalButton-@order.OrderId" onclick="openBasketModal('@order.OrderId')">
+                                <button type="button" class="btn btn-primary" id="ModalButton-@order.RowGuid" onclick="openBasketModal('@order.RowGuid')">
                                     Update
                                 </button>
-                        <button class="btn btn-danger"><a class="nav-link active" asp-controller="Order" asp-action="RemoveOrder" asp-route-id ="@order.OrderId">Remove</a></button>
+                        <button class="btn btn-danger"><a class="nav-link active" asp-controller="Order" asp-action="RemoveOrder" asp-route-id ="@order.RowGuid">Remove</a></button>
                     </div>
                     </li>
 
@@ -28,7 +28,7 @@
 
             </div>
         </div>
-            <div class="modal" id="Modal1-@order.OrderId" style="display:none">
+            <div class="modal" id="Modal1-@order.RowGuid" style="display:none">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <img class="img-fluid rounded" alt="..." style="height:500px; width:100%" id="ModalImage" src="~/Images/@order.ProductImage">
@@ -38,20 +38,20 @@
                                 <fieldset>
                                     <legend class="mt-4">Size</legend>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="orderDetails.Size" asp-for="@order.Details.Size" id="SizeOptions-Large-@order.OrderId" value="Large">
-                                        <label class="form-check-label" for="SizeOptions-Large-@order.OrderId">
+                                        <input class="form-check-input" type="radio" name="orderDetails.Size" asp-for="@order.Details.Size" id="SizeOptions-Large-@order.RowGuid" value="Large">
+                                        <label class="form-check-label" for="SizeOptions-Large-@order.RowGuid">
                                             Large
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="orderDetails.Size" asp-for="@order.Details.Size" id="SizeOptions-Medium-@order.OrderId" value="Medium">
-                                        <label class="form-check-label" for="SizeOptions-Medium-@order.OrderId">
+                                        <input class="form-check-input" type="radio" name="orderDetails.Size" asp-for="@order.Details.Size" id="SizeOptions-Medium-@order.RowGuid" value="Medium">
+                                        <label class="form-check-label" for="SizeOptions-Medium-@order.RowGuid">
                                             Medium
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="orderDetails.Size" asp-for="@order.Details.Size" id="SizeOptions-Small-@order.OrderId" value="Small">
-                                        <label class="form-check-label" for="SizeOptions-Small-@order.OrderId">
+                                        <input class="form-check-input" type="radio" name="orderDetails.Size" asp-for="@order.Details.Size" id="SizeOptions-Small-@order.RowGuid" value="Small">
+                                        <label class="form-check-label" for="SizeOptions-Small-@order.RowGuid">
                                             Small
                                         </label>
                                     </div>
@@ -62,14 +62,14 @@
                                 <fieldset>
                                     <legend class="mt-4">Drink</legend>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="orderDetails.ColdOrHot" asp-for="@order.Details.ColdOrHot" id="DrinkOptions-Iced-@order.OrderId" value="Iced">
-                                        <label class="form-check-label" for="DrinkOptions-Iced-@order.OrderId">
+                                        <input class="form-check-input" type="radio" name="orderDetails.ColdOrHot" asp-for="@order.Details.ColdOrHot" id="DrinkOptions-Iced-@order.RowGuid" value="Iced">
+                                        <label class="form-check-label" for="DrinkOptions-Iced-@order.RowGuid">
                                             Iced
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="orderDetails.ColdOrHot" asp-for="@order.Details.ColdOrHot" id="DrinkOptions-Normal-@order.OrderId" value="Normal">
-                                        <label class="form-check-label" for="DrinkOptions-Normal-@order.OrderId">
+                                        <input class="form-check-input" type="radio" name="orderDetails.ColdOrHot" asp-for="@order.Details.ColdOrHot" id="DrinkOptions-Normal-@order.RowGuid" value="Normal">
+                                        <label class="form-check-label" for="DrinkOptions-Normal-@order.RowGuid">
                                             Normal
                                         </label>
                                     </div>
@@ -78,14 +78,14 @@
                                 <fieldset>
                                     <legend class="mt-4">Would you like more caffein ?</legend>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="orderDetails.MoreCaffein" asp-for="@order.Details.MoreCaffein" id="CaffeinOptions-Yes-@order.OrderId" value="true">
-                                        <label class="form-check-label" for="CaffeinOptions-Yes-@order.OrderId">
+                                        <input class="form-check-input" type="radio" name="orderDetails.MoreCaffein" asp-for="@order.Details.MoreCaffein" id="CaffeinOptions-Yes-@order.RowGuid" value="true">
+                                        <label class="form-check-label" for="CaffeinOptions-Yes-@order.RowGuid">
                                             Yes
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="orderDetails.MoreCaffein" asp-for="@order.Details.MoreCaffein" id="CaffeinOptions-No-@order.OrderId" value="false">
-                                        <label class="form-check-label" for="CaffeinOptions-No-@order.OrderId">
+                                        <input class="form-check-input" type="radio" name="orderDetails.MoreCaffein" asp-for="@order.Details.MoreCaffein" id="CaffeinOptions-No-@order.RowGuid" value="false">
+                                        <label class="form-check-label" for="CaffeinOptions-No-@order.RowGuid">
                                             No
                                         </label>
                                     </div>
@@ -98,7 +98,7 @@
                                 </div>
 
 
-                                <input type="hidden" id="MenuIdInput" name="orderDetails.OrderId" asp-for="@order.OrderId" />
+                                <input type="hidden" id="MenuIdInput" name="orderDetails.OrderId" asp-for="@order.RowGuid" />
 
                                 <button type="submit" class="btn btn-primary" id="modalButton">Update</button>
                             </fieldset>

@@ -58,7 +58,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
                 var result = await _userManager.CreateAsync(user,newUser.Password);
 
                 if (result.Succeeded) {
-                    await _userManager.AddToRoleAsync(user, "User");
+                    await _userManager.AddToRoleAsync(user, "Admin");
                     return RedirectToAction("Index", "Login");
                 }
                 else

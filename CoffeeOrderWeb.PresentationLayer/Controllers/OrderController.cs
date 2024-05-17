@@ -11,9 +11,9 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
         {
             _orderService = orderService;
         }
-        public IActionResult RemoveOrder(int? id)
+        public IActionResult RemoveOrder(Guid? id)
         {
-            _orderService.Remove(_orderService.Get(i => i.OrderId == id));
+            _orderService.Remove(_orderService.Get(i => i.RowGuid == id));
 
             _orderService.Save();
 

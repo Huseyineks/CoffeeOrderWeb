@@ -43,6 +43,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             var user = await _userManager.GetUserAsync(User);
             Order newOrder = new Order()
             {
+                RowGuid = Guid.NewGuid(),
                 ProductImage = menu.ProductImage,
                 ProductName = menu.ProductName,
                 ProductPrice = menu.ProductPrice,
@@ -56,6 +57,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
                     
                 }
         };
+
             _orderService.Add(newOrder);
             _orderService.Save();
 
