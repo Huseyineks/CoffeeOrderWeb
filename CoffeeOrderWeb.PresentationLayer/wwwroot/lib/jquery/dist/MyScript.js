@@ -10,6 +10,7 @@ function openBasketModal(data) {
 
 }
 
+
 function openModal(data) {
    
 
@@ -33,6 +34,25 @@ function closeModal() {
 function clearModal() {
     $(".form-check-input").prop("checked", false);
     $("#Note").val("");
+}
+
+function showForm() {
+
+    $('#hiddenForm').show();
+
+}
+
+function hideForm() {
+
+    $("#CCName").val("");
+    $("#CCNumber").val("");
+    $("#CCDate").val("");
+    $("#CCCvv").val("");
+    $("#IsSaved").prop("checked", false);
+
+    $("#hiddenForm").hide();
+
+
 }
 
 

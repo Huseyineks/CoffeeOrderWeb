@@ -29,5 +29,7 @@ namespace CoffeeOrderWeb.EntityLayer.Model
         public virtual AppUser User { get; set; }
 
         public virtual OrderDetails Details { get; set; }
+
+        public virtual PaymentInformation Payment { get; set; }
     }
 }

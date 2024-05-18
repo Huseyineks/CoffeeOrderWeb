@@ -25,8 +25,10 @@ namespace CoffeeOrderWeb.EntityLayer.Model
 
 
         //relation
-        public virtual List<PaymentInformation>? PaymentInformations { get; set; }
+        
         public virtual List<Order>? Orders { get; set; }
+
+        public virtual List<CreditCard>? CreditCards { get; set; }
 
 
     }

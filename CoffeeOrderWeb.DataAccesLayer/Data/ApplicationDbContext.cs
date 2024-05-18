@@ -1,4 +1,5 @@
-﻿using CoffeeOrderWeb.EntityLayer.Model;
+﻿using CoffeeOrderWeb.DataAccesLayer.Migrations;
+using CoffeeOrderWeb.EntityLayer.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -39,11 +40,16 @@ namespace CoffeeOrderWeb.DataAccesLayer.Data
 
             builder.Entity<PaymentInformation>(entity =>
             {
-                entity.HasOne(i => i.User).WithMany(i => i.PaymentInformations).HasForeignKey(i => i.UserId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(i => i.Order).WithOne(i => i.Payment).HasForeignKey<PaymentInformation>(i => i.OrderId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            builder.Entity<CreditCard>(entity =>
+            {
+                entity.HasOne(i => i.User).WithMany(i => i.CreditCards).HasForeignKey(i => i.UserId).OnDelete(DeleteBehavior.Cascade);
             });
             SeedRoles(builder);
         }
-
+        
         private static void SeedRoles(ModelBuilder builder)
         {
            
@@ -65,5 +71,7 @@ namespace CoffeeOrderWeb.DataAccesLayer.Data
         public DbSet<PaymentInformation> PaymentInformations { get; set; }
 
         public DbSet<Menu> Menus { get; set; }
+
+        public DbSet<CreditCard> CreditCards { get; set;}
     }
 }
