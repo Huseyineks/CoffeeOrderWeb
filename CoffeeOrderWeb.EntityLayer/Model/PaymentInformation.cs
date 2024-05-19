@@ -25,9 +25,9 @@ namespace CoffeeOrderWeb.EntityLayer.Model
         //relation
        
 
-        public int OrderId { get; set; }
+        
 
-        public virtual Order Order { get; set; }
+        public virtual List<Order> Order { get; set; }
 
 
     }

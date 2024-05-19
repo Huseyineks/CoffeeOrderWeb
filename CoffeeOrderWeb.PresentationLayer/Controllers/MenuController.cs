@@ -48,6 +48,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
                 ProductName = menu.ProductName,
                 ProductPrice = menu.ProductPrice,
                 UserId = user.Id,
+                Status = OrderStatus.InBasket,
                 Details = new OrderDetails()
                 {
                     ColdOrHot = viewModel.orderDetails.ColdOrHot,

@@ -17,9 +17,9 @@ namespace CoffeeOrderWeb.BusinessLogicLayer.VMs
 
         public PaymentDTO ?creditCard { get; set;}
 
-        public bool ?Cash { get; set;}
+        public bool Cash { get; set;}
 
-        public bool? PayAtAdress { get;set;}
+        public bool PayAtAdress { get;set;}
 
         
     }

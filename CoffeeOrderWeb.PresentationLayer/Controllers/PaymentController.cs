@@ -10,12 +10,14 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IPaymentService _paymentService;
+        private readonly IOrderService _orderService;
 
 
-        public PaymentController(UserManager<AppUser> userManager,IPaymentService paymentService)
+        public PaymentController(UserManager<AppUser> userManager,IPaymentService paymentService, IOrderService orderService)
         {
             _userManager = userManager;
             _paymentService = paymentService;
+            _orderService = orderService;
         }
         public async Task<IActionResult> Index()
         {
@@ -31,11 +33,13 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             return View(paymentViewModel);
         }
         [HttpPost]
-        public IActionResult Index(PaymentViewModel paymentInfo) {
+        public async Task<IActionResult> Index(PaymentViewModel paymentInfo) {
             
-            var user = _userManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User);
 
-            if(paymentInfo.creditCard.IsSaved == true && paymentInfo.creditCard != null)
+            var orders = _orderService.GetClassifiedList(i => i.UserId == user.Id);
+
+            if (paymentInfo.creditCard.IsSaved == true && paymentInfo.creditCard != null)
             {
                 CreditCard creditCard = new CreditCard()
                 {
@@ -55,15 +59,52 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
                     PaymentAtAdress = false,
                     CreditCard = true,
                     // continue...
-                    
+                    PaymentConfirmed = true,
+
+
 
                 };
+                _paymentService.Add(paymentInformation);
+                _paymentService.Save();
+
+                foreach (var order in orders)
+                {
+                    order.PaymentId = paymentInformation.PaymentId;
+                    order.Status = OrderStatus.Processing;
+                }
+
+                
 
             }
+            else
+            {
+                PaymentInformation paymentInformation = new PaymentInformation()
+                {
+                    PaymentConfirmed = false,
+                    Cash = paymentInfo.Cash,
+                    CreditCard = false,
+                    PaymentAtAdress = paymentInfo.PayAtAdress,
+
+                };
+                _paymentService.Add(paymentInformation);
+                _paymentService.Save();
+
+                foreach (var order in orders)
+                {
+                    order.PaymentId = paymentInformation.PaymentId;
+                    order.Status = OrderStatus.Processing;
+                    _orderService.Update(order);
+                }
+
+            }
+            
+            _orderService.Save();
+
+            
 
 
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

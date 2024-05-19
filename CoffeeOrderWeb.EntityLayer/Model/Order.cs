@@ -20,6 +20,8 @@ namespace CoffeeOrderWeb.EntityLayer.Model
 
         public string ProductPrice { get; set; }
 
+        public OrderStatus Status { get; set; }
+
         public DateTime createdAt { get; set; } = DateTime.Now;
 
 
@@ -30,6 +32,7 @@ namespace CoffeeOrderWeb.EntityLayer.Model
 
         public virtual OrderDetails Details { get; set; }
 
-        public virtual PaymentInformation Payment { get; set; }
+        public int? PaymentId { get; set; }
+        public virtual PaymentInformation? Payment { get; set; }
     }
 }

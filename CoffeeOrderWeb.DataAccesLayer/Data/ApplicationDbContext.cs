@@ -34,13 +34,15 @@ namespace CoffeeOrderWeb.DataAccesLayer.Data
 
             builder.Entity<Order>(entity =>
             {
+                entity.Property(i => i.Status).HasConversion<string>();
                 entity.Property(i => i.OrderId).ValueGeneratedOnAdd();
                 entity.HasOne(i => i.User).WithMany(i => i.Orders).HasForeignKey(i => i.UserId).OnDelete(DeleteBehavior.Cascade);
             });
 
             builder.Entity<PaymentInformation>(entity =>
             {
-                entity.HasOne(i => i.Order).WithOne(i => i.Payment).HasForeignKey<PaymentInformation>(i => i.OrderId).OnDelete(DeleteBehavior.Cascade);
+                entity.Property(i => i.PaymentId).ValueGeneratedOnAdd();
+                entity.HasMany(i => i.Order).WithOne(i => i.Payment).HasForeignKey(i => i.PaymentId).OnDelete(DeleteBehavior.SetNull);
             });
 
             builder.Entity<CreditCard>(entity =>
