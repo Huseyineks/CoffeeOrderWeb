@@ -23,6 +23,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             var userOrders= _orderService.GetOrderDetails(i => i.UserId == user.Id);
+            userOrders = userOrders.AsQueryable().Where(i => i.Status == OrderStatus.InBasket).ToList();
             BasketViewModel basketViewModel = new BasketViewModel()
             {
                 orders = userOrders,
@@ -56,14 +57,14 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
 
         public IActionResult Details()
         {
-            var orders = _orderService.GetAll();
+            var orders = _orderService.GetAll().Where(i => i.Status == OrderStatus.InBasket).ToList();
             float totalPrice = 0;
             List<string> Products = new List<string>();
 
-            foreach(var product in orders)
+            foreach(var order in orders)
             {
-                totalPrice += float.Parse(product.ProductPrice, NumberStyles.Float, CultureInfo.InvariantCulture);
-                Products.Add(product.ProductName);
+                totalPrice += float.Parse(order.ProductPrice, NumberStyles.Float, CultureInfo.InvariantCulture);
+                Products.Add(order.ProductName);
                 
             }
             ViewBag.TotalPrice = totalPrice;

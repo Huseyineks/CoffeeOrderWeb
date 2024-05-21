@@ -12,15 +12,13 @@ namespace CoffeeOrderWeb.EntityLayer.Model
         [Key]
         public int PaymentId { get; set; }
 
-        public bool Cash {  get; set; }
-
-        public bool PaymentAtAdress { get; set; }
+       public string CashOrPayAtAdress { get; set; }
 
         public bool CreditCard { get; set; }
 
         public bool PaymentConfirmed { get; set; }
 
-
+        public string totalPrice { get; set; }
        
         //relation
        

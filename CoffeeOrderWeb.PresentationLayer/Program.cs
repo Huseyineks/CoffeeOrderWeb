@@ -27,6 +27,7 @@ builder.Services.AddScoped<IOrderDetailsService, OrderDetailsService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IPaymentService,PaymentService>();
 builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddScoped<ICreditCardService,CreditCardService>();
 
 
 builder.Services.AddAuthorization(options =>

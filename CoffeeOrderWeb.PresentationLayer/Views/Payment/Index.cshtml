@@ -1,12 +1,46 @@
 ﻿@model PaymentViewModel
 
-<div class="container p-5">
+
+
+
+
+<div class="container">
+
+<div class="row p-5" style="gap:25px;">
+    <div class="border rounded p-4 col-7">
+    <h2>Shipping Adress</h2>
+    <h4 class="mt-5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+        </svg> @Model.City . @Model.Region . @Model.PostalCode .
+    </h4>
+    <p class="mt-5">@Model.FullAdress</p>
+    </div>
+    <div class="border rounded p-4 col-4">
+        <h2>Shipping Adress</h2>
+        <h4 class="mt-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+            </svg> @Model.City . @Model.Region . @Model.PostalCode .
+        </h4>
+        <p class="mt-5">@Model.FullAdress</p>
+    </div>
+
+
+
+
+
+</div>
+<div class="row p-5" style="gap:25px;">
+    <div class="col-7">
     <form method="post">
 
     <div class="border rounded p-4">
        
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="radioCreditCard" onclick="showForm()">
+        <input class="form-check-input" type="radio" asp-for="CashOrPayAtAdress" id="radioCreditCard" onclick="showForm()" value="0">
            
         <label class="form-check-label" for="radioCreditCard">
                 <img width="40px" src="https://images.deliveryhero.io/image/foodpanda/payment_icons/payment_method/ic-payments-yemekpay_creditcard-xs.png" alt="" data-testid="payment-item-icon">
@@ -59,7 +93,7 @@
     </div>
     <div class="border rounded p-4">
         <div class="form-check">
-            <input class="form-check-input" type="radio"  id="CashRadio" onclick="hideForm()" asp-for="Cash" value="true">
+            <input class="form-check-input" type="radio"  id="CashRadio" onclick="hideForm()" asp-for="CashOrPayAtAdress" value="Cash">
             <label class="form-check-label" for="CashRadio">
                 <img width="40px" src="https://images.deliveryhero.io/image/foodpanda/payment_icons/payment_method/ic-payments-cash-xs.png" alt="" data-testid="payment-item-icon">
                 Cash
@@ -69,7 +103,7 @@
     </div>
     <div class="border rounded p-4">
         <div class="form-check">
-            <input class="form-check-input" type="radio" id="PADRadio" onclick="hideForm()"  asp-for="PayAtAdress" value="true">
+            <input class="form-check-input" type="radio" id="PADRadio" onclick="hideForm()"  asp-for="CashOrPayAtAdress" value="PayAtAdress">
             <label class="form-check-label" for="PADRadio">
                 <img width="40px" src="https://images.deliveryhero.io/image/foodpanda/payment_icons/payment_method/ic-payments-yemekpay_cardpayment-xs.png" alt="" data-testid="payment-item-icon">
                 Credit Card At The Adress
@@ -77,10 +111,11 @@
         </div>
 
     </div>
-   
+    <input type="text" hidden asp-for="TotalPrice" value="@TempData["totalPrice"]"/>
     <button type="submit" class="btn btn-success col-12">Complete Order</button>
     </form>
 
 </div>
-
+</div>
+</div>
 <script src="~/lib/jquery/dist/MyScript.js"></script>

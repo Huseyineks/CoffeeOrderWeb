@@ -3,6 +3,7 @@ using CoffeeOrderWeb.BusinessLogicLayer.VMs;
 using CoffeeOrderWeb.EntityLayer.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
 
 namespace CoffeeOrderWeb.PresentationLayer.Controllers
 {
@@ -11,15 +12,17 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IPaymentService _paymentService;
         private readonly IOrderService _orderService;
+        private readonly ICreditCardService _creditCardService;
 
 
-        public PaymentController(UserManager<AppUser> userManager,IPaymentService paymentService, IOrderService orderService)
+        public PaymentController(UserManager<AppUser> userManager,IPaymentService paymentService, IOrderService orderService, ICreditCardService creditCardService)
         {
             _userManager = userManager;
             _paymentService = paymentService;
             _orderService = orderService;
+            _creditCardService = creditCardService;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string totalPrice)
         {
            var user = await _userManager.GetUserAsync(User);
 
@@ -27,8 +30,12 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             {
                 City = user.City,
                 FullAdress = user.FullAdress,
-                Region = user.Region
+                Region = user.Region,
+                PostalCode = user.PostalCode,
+                
+                
             };
+            TempData["TotalPrice"] = totalPrice;
 
             return View(paymentViewModel);
         }
@@ -38,6 +45,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             var orders = _orderService.GetClassifiedList(i => i.UserId == user.Id);
+            orders = orders.Where(i => i.Status == OrderStatus.InBasket).ToList();
 
             if (paymentInfo.creditCard.IsSaved == true && paymentInfo.creditCard != null)
             {
@@ -52,14 +60,17 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
 
 
                 };
+                
+                _creditCardService.Add(creditCard);
+                _creditCardService.Save();
 
                 PaymentInformation paymentInformation = new PaymentInformation()
                 {
-                    Cash = false,
-                    PaymentAtAdress = false,
+                    CashOrPayAtAdress = paymentInfo.CashOrPayAtAdress,
                     CreditCard = true,
                     // continue...
                     PaymentConfirmed = true,
+                    totalPrice = paymentInfo.TotalPrice
 
 
 
@@ -81,9 +92,13 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
                 PaymentInformation paymentInformation = new PaymentInformation()
                 {
                     PaymentConfirmed = false,
-                    Cash = paymentInfo.Cash,
+                   
                     CreditCard = false,
-                    PaymentAtAdress = paymentInfo.PayAtAdress,
+
+                    CashOrPayAtAdress = paymentInfo.CashOrPayAtAdress,
+
+                    totalPrice = paymentInfo.TotalPrice
+
 
                 };
                 _paymentService.Add(paymentInformation);

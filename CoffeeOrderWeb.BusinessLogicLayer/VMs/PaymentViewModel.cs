@@ -15,11 +15,13 @@ namespace CoffeeOrderWeb.BusinessLogicLayer.VMs
 
         public string ?FullAdress { get; set; }
 
+        public string PostalCode { get; set; }
+
         public PaymentDTO ?creditCard { get; set;}
 
-        public bool Cash { get; set;}
+        public string CashOrPayAtAdress { get; set; }
 
-        public bool PayAtAdress { get;set;}
+        public string TotalPrice { get; set; }
 
         
     }
