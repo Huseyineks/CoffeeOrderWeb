@@ -11,9 +11,9 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
 
-        private readonly IValidator<RegisterUserDTO> _validator;
+        private readonly IValidator<UserInformationDTO> _validator;
 
-        public RegisterController(UserManager<AppUser> userManager,IValidator<RegisterUserDTO> validator)
+        public RegisterController(UserManager<AppUser> userManager,IValidator<UserInformationDTO> validator)
         {
             _userManager = userManager;
             _validator = validator;
@@ -27,7 +27,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
         [AllowAnonymous]
         [HttpPost]
 
-        public async Task<IActionResult> Index(RegisterUserDTO newUser)
+        public async Task<IActionResult> Index(UserInformationDTO newUser)
         {
             var check = _validator.Validate(newUser);
 
@@ -52,7 +52,8 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
                     Region = newUser.Region,
                     PostalCode = newUser.PostalCode,
                     FullAdress = newUser.FullAdress,
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    RowGuid = Guid.NewGuid()
 
                 };
                 var result = await _userManager.CreateAsync(user,newUser.Password);

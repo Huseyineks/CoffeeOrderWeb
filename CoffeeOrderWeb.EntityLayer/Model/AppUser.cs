@@ -9,6 +9,8 @@ namespace CoffeeOrderWeb.EntityLayer.Model
 {
     public class AppUser : IdentityUser<int>
     {
+        public Guid RowGuid { get; set; }
+
         public string Name { get; set; }
 
         public string LastName { get; set; }

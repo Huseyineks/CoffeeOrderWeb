@@ -33,14 +33,13 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             
             if (user != null)
             {
-                // Kullanýcý bilgilerine eriþim
+                
                 var userName = user.Name;
                 var email = user.Email;
                 var lastname = user.LastName;
 
 
-                // Eriþilen bilgileri kullanarak iþlem yapabilirsiniz
-                // Örneðin, bir view'e bu bilgileri göndererek görüntüleme yapabilirsiniz
+                
                 return View(new AppUser
                 {
                     Name = userName,
@@ -51,12 +50,11 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             }
             else
             {
-                // Kullanýcý bulunamadý veya kimlik doðrulanamadý
-                // Ýlgili iþlemi gerçekleþtirin, örneðin hata sayfasýna yönlendirin
+                
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            
         }
 
         public IActionResult Privacy()
