@@ -1,4 +1,5 @@
 ﻿using CoffeeOrderWeb.BusinessLogicLayer.DTOs;
+using CoffeeOrderWeb.EntityLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace CoffeeOrderWeb.BusinessLogicLayer.VMs
 {
     public class PaymentViewModel
     {
+        public List<Order> orders { get; set; }
+
         public string ?City { get; set; }
 
         public string ?Region { get; set; }

@@ -55,23 +55,6 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             return RedirectToAction("Index","Basket");
         }
 
-        public IActionResult Details()
-        {
-            var orders = _orderService.GetAll().Where(i => i.Status == OrderStatus.InBasket).ToList();
-            float totalPrice = 0;
-            List<string> Products = new List<string>();
-
-            foreach(var order in orders)
-            {
-                totalPrice += float.Parse(order.ProductPrice, NumberStyles.Float, CultureInfo.InvariantCulture);
-                Products.Add(order.ProductName);
-                
-            }
-            ViewBag.TotalPrice = totalPrice;
-            ViewBag.Products = Products;
-            
-
-            return View();
-        }
+         
     }
 }

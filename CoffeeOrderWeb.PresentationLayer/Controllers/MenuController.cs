@@ -49,6 +49,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
                 ProductPrice = menu.ProductPrice,
                 UserId = user.Id,
                 Status = OrderStatus.InBasket,
+                ProductCount = 1,
                 Details = new OrderDetails()
                 {
                     ColdOrHot = viewModel.orderDetails.ColdOrHot,
@@ -57,6 +58,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
                     Size = viewModel.orderDetails.Size
                     
                 }
+                
         };
 
             _orderService.Add(newOrder);

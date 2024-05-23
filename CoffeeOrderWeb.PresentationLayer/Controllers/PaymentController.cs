@@ -4,6 +4,7 @@ using CoffeeOrderWeb.EntityLayer.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
+using System.Globalization;
 
 namespace CoffeeOrderWeb.PresentationLayer.Controllers
 {
@@ -22,20 +23,32 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             _orderService = orderService;
             _creditCardService = creditCardService;
         }
-        public async Task<IActionResult> Index(string totalPrice)
+        public async Task<IActionResult> Index()
         {
            var user = await _userManager.GetUserAsync(User);
+           var orders = _orderService.GetClassifiedList(i => i.UserId == user.Id).Where(i => i.Status == OrderStatus.InBasket).ToList();
+           float totalPrice = 0;
 
+            foreach (var order in orders)
+            {
+                if (order.ProductPrice.Contains(','))
+                {
+                    order.ProductPrice = order.ProductPrice.Replace(',', '.');
+                }
+                totalPrice += float.Parse(order.ProductPrice, NumberStyles.Float, CultureInfo.InvariantCulture);
+            }
+            ViewBag.TotalPrice = totalPrice;
             PaymentViewModel paymentViewModel = new PaymentViewModel()
             {
                 City = user.City,
                 FullAdress = user.FullAdress,
                 Region = user.Region,
                 PostalCode = user.PostalCode,
-                
-                
+                orders = orders,
+
             };
-            TempData["TotalPrice"] = totalPrice;
+
+            
 
             return View(paymentViewModel);
         }
@@ -120,6 +133,35 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
 
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult RemoveOrder(Guid guid)
+        {
+            var order = _orderService.Get(i => i.RowGuid == guid);
+            if (order.ProductPrice.Contains(','))
+            {
+                order.ProductPrice = order.ProductPrice.Replace(',', '.');
+            }
+            var floatPrice = float.Parse(order.ProductPrice, NumberStyles.Float, CultureInfo.InvariantCulture);
+            var price = floatPrice - floatPrice / order.ProductCount;
+            if (order.ProductCount == 1)
+            {
+
+
+                _orderService.Remove(order);
+
+            }
+            else
+            {
+                order.ProductCount--;
+                order.ProductPrice = price.ToString();
+                _orderService.Update(order);
+            }
+            
+            _orderService.Save();
+
+            return RedirectToAction("Index","Payment");
+
         }
     }
 }

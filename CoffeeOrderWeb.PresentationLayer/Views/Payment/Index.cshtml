@@ -1,121 +1,125 @@
 ﻿@model PaymentViewModel
 
 
-
-
-
-<div class="container">
-
-<div class="row p-5" style="gap:25px;">
-    <div class="border rounded p-4 col-7">
-    <h2>Shipping Adress</h2>
-    <h4 class="mt-5">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-        </svg> @Model.City . @Model.Region . @Model.PostalCode .
-    </h4>
-    <p class="mt-5">@Model.FullAdress</p>
-    </div>
-    <div class="border rounded p-4 col-4">
-        <h2>Shipping Adress</h2>
-        <h4 class="mt-5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-            </svg> @Model.City . @Model.Region . @Model.PostalCode .
-        </h4>
-        <p class="mt-5">@Model.FullAdress</p>
-    </div>
+<div class="container p-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="border rounded p-4">
+                <h2>Shipping Address</h2>
+                <h4 class="mt-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                        <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                    </svg> @Model.City . @Model.Region . @Model.PostalCode .
+                </h4>
+                <p class="mt-5">@Model.FullAdress</p>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="border rounded p-4">
+                <h2>Your Order</h2>
+                <div class="mt-5">
+                @foreach(var order in Model.orders){
 
 
 
 
+                        <ul style="display:flex; justify-content:space-between; list-style-type:none; padding:0;">
+                            <li>
+                               <p> @order.ProductCount  x  @order.ProductName </p>
+                            </li>
+                            <li>
+                              <p>+@order.ProductPrice$
+                                   <a asp-controller="Payment" asp-action="RemoveOrder"  asp-route-guid="@order.RowGuid" style="color:inherit;"> 
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                    </svg>
+                                    </a>
+                              </p>
+                            </li>
+                        </ul>
+                
+                         
+                            
+                }
+                <hr />
 
-</div>
-<div class="row p-5" style="gap:25px;">
-    <div class="col-7">
-    <form method="post">
-
-    <div class="border rounded p-4">
-       
-    <div class="form-check">
-        <input class="form-check-input" type="radio" asp-for="CashOrPayAtAdress" id="radioCreditCard" onclick="showForm()" value="0">
-           
-        <label class="form-check-label" for="radioCreditCard">
-                <img width="40px" src="https://images.deliveryhero.io/image/foodpanda/payment_icons/payment_method/ic-payments-yemekpay_creditcard-xs.png" alt="" data-testid="payment-item-icon">
-            Credit Card
-        </label>
-    </div>
-        <div class="container p-2" style="display:none;" id ="hiddenForm">
-
-            
-                <fieldset>
-
-                 <div class="row">
-                    <div>
-                        <label for="CCName" class="form-label mt-4">Credit Card Name</label>
-                        <input type="text" class="form-control" id="CCName" placeholder="Enter name" asp-for="creditCard.cardName">
-                        
-                    </div>
-                    <div>
-                        <label for="CCNumber" class="form-label mt-4">Credit Card Number</label>
-                        <input type="text" class="form-control" id="CCNumber" placeholder="Enter number" autocomplete="off" asp-for="creditCard.cardNumber">
-                    </div>
-                    <div class="col-6">
-                        <label for="CCDate" class="form-label mt-4">Date</label>
-                        <input type="text" class="form-control" id="CCDate" placeholder="Month/Year" asp-for="creditCard.cardExpirationDate">
-                        
-                    </div>
-                    <div class="col-6">
-                        <label for="CCCv" class="form-label mt-4">Cvv</label>
-                        <input type="text" class="form-control" id="CCCvv" autocomplete="off" asp-for="creditCard.cardCvCode">
-                    </div>
-
-
-                    <fieldset>
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox"  id="IsSaved" asp-for="creditCard.IsSaved">
-                            <label class="form-check-label" for="IsSaved">
-                                Save
-                            </label>
-                        </div>
-                    </fieldset>
-
-            
-
+                   
+                    <ul style="display:flex; justify-content:space-between; list-style-type:none; padding:0;">
+                        <li>
+                            <h2>Toplam</h2>
+                        </li>
+                        <li>
+                            <h2>@ViewBag.TotalPrice$</h2>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-
-
-    </div>
-    <div class="border rounded p-4">
-        <div class="form-check">
-            <input class="form-check-input" type="radio"  id="CashRadio" onclick="hideForm()" asp-for="CashOrPayAtAdress" value="Cash">
-            <label class="form-check-label" for="CashRadio">
-                <img width="40px" src="https://images.deliveryhero.io/image/foodpanda/payment_icons/payment_method/ic-payments-cash-xs.png" alt="" data-testid="payment-item-icon">
-                Cash
-            </label>
+    <div class="row mt-5">
+        <div class="col-lg-6">
+            <form method="post">
+                <div class="border rounded p-4 mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="CashOrPayAtAdress" id="radioCreditCard" onclick="showForm()" value="0">
+                        <label class="form-check-label" for="radioCreditCard">
+                            <img width="40px" src="https://images.deliveryhero.io/image/foodpanda/payment_icons/payment_method/ic-payments-yemekpay_creditcard-xs.png" alt="" data-testid="payment-item-icon">
+                            Credit Card
+                        </label>
+                    </div>
+                    <div class="container p-2" style="display:none;" id="hiddenForm">
+                        <fieldset>
+                            <div class="row">
+                                <div>
+                                    <label for="CCName" class="form-label mt-4">Credit Card Name</label>
+                                    <input type="text" class="form-control" id="CCName" placeholder="Enter name" asp-for="creditCard.cardName">
+                                </div>
+                                <div>
+                                    <label for="CCNumber" class="form-label mt-4">Credit Card Number</label>
+                                    <input type="text" class="form-control" id="CCNumber" placeholder="Enter number" autocomplete="off" asp-for="creditCard.cardNumber">
+                                </div>
+                                <div class="col-6">
+                                    <label for="CCDate" class="form-label mt-4">Date</label>
+                                    <input type="text" class="form-control" id="CCDate" placeholder="Month/Year" asp-for="creditCard.cardExpirationDate">
+                                </div>
+                                <div class="col-6">
+                                    <label for="CCCv" class="form-label mt-4">Cvv</label>
+                                    <input type="text" class="form-control" id="CCCvv" autocomplete="off" asp-for="creditCard.cardCvCode">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="IsSaved" asp-for="creditCard.IsSaved">
+                                <label class="form-check-label" for="IsSaved">Save</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="border rounded p-4 mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="CashRadio" onclick="hideForm()" asp-for="CashOrPayAtAdress" value="Cash">
+                        <label class="form-check-label" for="CashRadio">
+                            <img width="40px" src="https://images.deliveryhero.io/image/foodpanda/payment_icons/payment_method/ic-payments-cash-xs.png" alt="" data-testid="payment-item-icon">
+                            Cash
+                        </label>
+                    </div>
+                </div>
+                <div class="border rounded p-4 mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="PADRadio" onclick="hideForm()" asp-for="CashOrPayAtAdress" value="PayAtAdress">
+                        <label class="form-check-label" for="PADRadio">
+                            <img width="40px" src="https://images.deliveryhero.io/image/foodpanda/payment_icons/payment_method/ic-payments-yemekpay_cardpayment-xs.png" alt="" data-testid="payment-item-icon">
+                            Credit Card At The Address
+                        </label>
+                    </div>
+                </div>
+                <input type="text" hidden asp-for="TotalPrice" value="@ViewBag.TotalPrice" />
+                <button type="submit" class="btn btn-success col-12">Complete Order</button>
+            </form>
         </div>
-
     </div>
-    <div class="border rounded p-4">
-        <div class="form-check">
-            <input class="form-check-input" type="radio" id="PADRadio" onclick="hideForm()"  asp-for="CashOrPayAtAdress" value="PayAtAdress">
-            <label class="form-check-label" for="PADRadio">
-                <img width="40px" src="https://images.deliveryhero.io/image/foodpanda/payment_icons/payment_method/ic-payments-yemekpay_cardpayment-xs.png" alt="" data-testid="payment-item-icon">
-                Credit Card At The Adress
-            </label>
-        </div>
-
-    </div>
-    <input type="text" hidden asp-for="TotalPrice" value="@TempData["totalPrice"]"/>
-    <button type="submit" class="btn btn-success col-12">Complete Order</button>
-    </form>
-
-</div>
-</div>
 </div>
 <script src="~/lib/jquery/dist/MyScript.js"></script>

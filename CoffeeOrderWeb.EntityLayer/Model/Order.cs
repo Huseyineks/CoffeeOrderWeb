@@ -20,6 +20,8 @@ namespace CoffeeOrderWeb.EntityLayer.Model
 
         public string ProductPrice { get; set; }
 
+        public int ProductCount { get; set; }
+
         public OrderStatus Status { get; set; }
 
         public DateTime createdAt { get; set; } = DateTime.Now;
