@@ -19,9 +19,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
         public MenuController(IMenuService menuService, IOrderService orderService, IOrderDetailsService orderDetailsService, UserManager<AppUser> userManager)
         {
             _menuService = menuService;
-            _orderService = orderService;
-            _orderDetailsService = orderDetailsService;
-            _userManager = userManager;
+       
             
         }
         public IActionResult Index()
@@ -35,42 +33,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
-
-        public async Task<IActionResult> Index(MenuViewModel viewModel)
-        {
-            var menu = _menuService.Get(i => i.MenuId == viewModel.orderDetails.OrderId);
-            var user = await _userManager.GetUserAsync(User);
-            Order newOrder = new Order()
-            {
-                RowGuid = Guid.NewGuid(),
-                ProductImage = menu.ProductImage,
-                ProductName = menu.ProductName,
-                ProductPrice = menu.ProductPrice,
-                UserId = user.Id,
-                Status = OrderStatus.InBasket,
-                ProductCount = 1,
-                Details = new OrderDetails()
-                {
-                    ColdOrHot = viewModel.orderDetails.ColdOrHot,
-                    MoreCaffein = viewModel.orderDetails.MoreCaffein,
-                    Note = viewModel.orderDetails.Note,
-                    Size = viewModel.orderDetails.Size
-                    
-                }
-                
-        };
-
-            _orderService.Add(newOrder);
-            _orderService.Save();
-
-
-
-
-
-
-            return RedirectToAction("Index","Menu");
-        }
+     
     }
 }
 

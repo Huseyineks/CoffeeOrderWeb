@@ -135,20 +135,24 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult RemoveOrder(Guid guid)
+        public async Task<IActionResult> RemoveOrder(Guid guid)
         {
             var order = _orderService.Get(i => i.RowGuid == guid);
+            var user = await _userManager.GetUserAsync(User);
+            var orders = _orderService.GetClassifiedList(i => i.Status == OrderStatus.InBasket && i.UserId == user.Id);
             if (order.ProductPrice.Contains(','))
             {
                 order.ProductPrice = order.ProductPrice.Replace(',', '.');
             }
             var floatPrice = float.Parse(order.ProductPrice, NumberStyles.Float, CultureInfo.InvariantCulture);
             var price = floatPrice - floatPrice / order.ProductCount;
-            if (order.ProductCount == 1)
+            if (order.ProductCount == 1 && orders.Count == 1) // burda sıkıntı var 0 da kalıyor ve sayfa yenilenmez yarın bak....
             {
 
 
                 _orderService.Remove(order);
+                _orderService.Save();
+                return RedirectToAction("Index", "Home");
 
             }
             else
