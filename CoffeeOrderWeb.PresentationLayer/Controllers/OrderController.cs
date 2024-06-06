@@ -92,6 +92,33 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
 
             return RedirectToAction("Index","Basket");
         }
+        public IActionResult Reduce(Guid? guid)
+        {
+            var order = _orderService.Get(i => i.RowGuid == guid);
+            if(order.ProductCount == 1) { 
+            
+                _orderService.Remove(order);
+                _orderService.Save();
+                return RedirectToAction("Index", "Home");
+            
+            }
+            if (order.ProductPrice.Contains(','))
+            {
+                order.ProductPrice = order.ProductPrice.Replace(',', '.');
+            }
+            var floatPrice = float.Parse(order.ProductPrice, NumberStyles.Float, CultureInfo.InvariantCulture);
+            var price = floatPrice - floatPrice / order.ProductCount;
+            order.ProductCount--;
+
+
+            order.ProductPrice = price.ToString();
+
+            _orderService.Update(order);
+            _orderService.Save();
+
+
+            return RedirectToAction("Index", "Basket");
+        }
         [HttpPost]
         public async Task<IActionResult> UpdateOrder(BasketViewModel viewModel)
         {

@@ -157,6 +157,14 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             }
             else
             {
+                if(order.ProductCount == 1)
+                {
+
+                    _orderService.Remove(order);
+                    _orderService.Save();
+                    return RedirectToAction("Index", "Payment");
+
+                }
                 order.ProductCount--;
                 order.ProductPrice = price.ToString();
                 _orderService.Update(order);
