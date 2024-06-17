@@ -19,6 +19,8 @@ namespace CoffeeOrderWeb.BusinessLogicLayer.DTOs
 
         public string? confirmPassword { get; set; }
 
+        public string? currentPassword { get; set; }
+
         public string City { get; set; }
 
         public string Region { get; set; }

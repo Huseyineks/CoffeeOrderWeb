@@ -49,6 +49,8 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             var user = await _userManager.GetUserAsync(User);
             userInformation.AuthenticatedUserGuid = user.RowGuid;
             var check =  _validator.Validate(userInformation);
+            
+            
 
             foreach (var error in check.Errors) {
 
@@ -64,7 +66,20 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
                 user.Region = userInformation.Region;
                 user.UserName = userInformation.UserName;
                 user.FullAdress = userInformation.FullAdress;
-                // passwordun nasıl değiştirileciğine bak...
+                if(userInformation.Password != null && await _userManager.CheckPasswordAsync(user, userInformation.currentPassword)) {
+
+                   
+                      var result = await _userManager.ChangePasswordAsync(user,userInformation.currentPassword,userInformation.Password);
+                      if(!result.Succeeded)
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(String.Empty,error.Description);
+                        }
+                    }
+                
+                
+                }
             }
 
             await _userManager.UpdateAsync(user);

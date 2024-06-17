@@ -146,7 +146,7 @@ namespace CoffeeOrderWeb.PresentationLayer.Controllers
             }
             var floatPrice = float.Parse(order.ProductPrice, NumberStyles.Float, CultureInfo.InvariantCulture);
             var price = floatPrice - floatPrice / order.ProductCount;
-            if (order.ProductCount == 1 && orders.Count == 1) // burda sıkıntı var 0 da kalıyor ve sayfa yenilenmez yarın bak....
+            if (order.ProductCount == 1 && orders.Count == 1)
             {
 
 
